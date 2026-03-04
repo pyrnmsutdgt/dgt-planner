@@ -92,8 +92,9 @@ function Timetable({courses,onEdit}){
     <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
       <div style={{minWidth:640}}>
         <div style={{display:"flex"}}>
-          <div style={{width:DAY_COL,flexShrink:0}}/>
-          <div style={{flex:1,display:"flex",borderLeft:"1px solid #1E3A5F",borderTop:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",borderRadius:"8px 8px 0 0",overflow:"hidden"}}>
+          
+          <div style={{width:DAY_COL,flexShrink:0,fontSize:12,borderLeft:"1px solid #1E3A5F",borderTop:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",borderRadius:"8px 0px 0 0",overflow:"hidden",padding:"6px 6px",background:"#1E293B"}}>วันและเวลา</div>
+          <div style={{flex:1,display:"flex",borderLeft:"1px solid #1E3A5F",borderTop:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",borderRadius:"0px 8px 0 0",overflow:"hidden"}}>
             {HOURS.map((h,i)=>(
               <div key={h} style={{flex:1,textAlign:"center",fontSize:14,color:"#64748B",padding:"4px 2px",background:"#1E293B",borderRight:i<HOURS.length-1?"1px solid #1E3A5F":"none",lineHeight:1.3}}>
                 {String(h).padStart(2,"0")}:00-{String(h+1).padStart(2,"0")}:00
@@ -106,10 +107,10 @@ function Timetable({courses,onEdit}){
           const isWE=day==="เสาร์"||day==="อาทิตย์";
           return(
             <div key={day} style={{display:"flex"}}>
-              <div style={{width:DAY_COL,flexShrink:0,height:ROW_H,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:600,color:isWE?"#F59E0B":"#94A3B8",borderBottom:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",background:isWE?"#1A1500":di%2===0?"#131D2E":"#101830"}}>{day}</div>
-              <div style={{flex:1,height:ROW_H,position:"relative",borderBottom:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",background:isWE?"#120F00":di%2===0?"#0E1828":"#101830",borderRadius:di===DAYS.length-1?"0 0 8px 0":undefined,overflow:"hidden"}}>
+              <div style={{width:DAY_COL,flexShrink:0,height:ROW_H,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:600,color:isWE?"#F59E0B":"#94A3B8",borderBottom:"1px solid #1E3A5F",borderBottomLeftRadius:di===DAYS.length-1&&isWE?"8px":undefined,borderRight:"1px solid #1E3A5F",background:isWE?"#1A1500":di%2===0?"#131D2E":"#101830"}}>{day}</div>
+              <div style={{flex:1,height:ROW_H,position:"relative",borderBottom:"1px solid #1E3A5F",borderRight:"1px solid #1E3A5F",background:isWE?"#120F00":di%2===0?"#0E1828":"#101830",borderRadius:di===DAYS.length-1?"0px 0px 8px 0":undefined,overflow:"hidden"}}>
                 {HOURS.map((_,i)=><div key={i} style={{position:"absolute",top:0,bottom:0,left:`${(i/HOUR_COLS)*100}%`,width:1,background:"#1E3A5F"}}/>)}
-                {HOURS.map((_,i)=><div key={"h"+i} style={{position:"absolute",top:0,bottom:0,left:`${((i+0.5)/HOUR_COLS)*100}%`,width:1,background:"#162030"}}/>)}
+                {HOURS.map((_,i)=><div key={"h"+i} style={{position:"absolute",top:0,bottom:0,left:`${((i+0.5)/HOUR_COLS)*100}%`,width:1,background:"#162038"}}/>)}
                 {dc.map(c=>{
                   const sm=toMin(c.startHour,c.startMin)-480;
                   const dm=toMin(c.endHour,c.endMin)-toMin(c.startHour,c.startMin);
@@ -633,7 +634,7 @@ export default function App(){
       </div>
 
       {/* ── Body ── */}
-      <div style={{flex:1,display:"flex",overflow:"hidden"}}>
+      <div style={{flex:1,display:"flex",overflow:"hidden",background:"#101830"}}>
 
         {/* Desktop: always-visible sidebar — 25% of viewport */}
         {isDesktop&&(
